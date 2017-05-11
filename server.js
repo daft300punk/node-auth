@@ -9,9 +9,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-var dbUrl = require('./config/database.js');
+var dbConfig = require('./config/database.js');
 
-mongoose.connect(dbUrl);
+mongoose.connect(dbConfig.url);
 
 app.use(morgan('dev'));
 app.use(cookieParser());
