@@ -6,8 +6,8 @@ module.exports = function(passport) {
     done(null, user.id);
   });
 
-  passport.deserializeUser(function(user, done) {
-    User.findById(user.id, function(err, user) {
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
       done(err, user);
     });
   });
@@ -41,7 +41,7 @@ module.exports = function(passport) {
   }));
 
   passport.use('local-login', new LocalStrategy({
-    usernameFiled: 'email',
+    usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true,
   },
@@ -54,7 +54,8 @@ module.exports = function(passport) {
 
       if(!user.validPassword(password))
         return done(null, false, req.flash('loginMessage', 'Oops! wrong password'));
-
+      
+      console.log('Success login');
       return done(null, user);
     });
   }));

@@ -9,8 +9,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-require('./config/passport')(passport);
-
 mongoose.Promise = Promise;
 
 var dbConfig = require('./config/database.js');
@@ -31,6 +29,8 @@ app.use(session({secret: 'absi'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+require('./config/passport')(passport);
 
 require('./app/routes.js')(app, passport);
 

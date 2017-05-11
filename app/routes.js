@@ -23,15 +23,24 @@ module.exports = function(app, passport) {
     failureFlash: true
   }));
 
+  app.get('/profile', isLoggedIn, function(req, res) {
+    console.log('profile');
+    res.render('profile.ejs', {
+      user: req.user
+    });
+  });
+
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
   });
 
-  function isLoaggedIn(req, res, next) {
+  function isLoggedIn(req, res, next) {
+    console.log(req.isAuthenticated());
     if(req.isAuthenticated())
       return next();
     
+    console.log('here');
     res.redirect('/');
   }
 }
