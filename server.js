@@ -9,6 +9,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
+require('./config/passport')(passport);
+
 mongoose.Promise = Promise;
 
 var dbConfig = require('./config/database.js');

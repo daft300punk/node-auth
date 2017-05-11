@@ -11,6 +11,12 @@ module.exports = function(app, passport) {
     res.render('signup.ejs', {message: req.flash('signupMessage')});
   });
 
+  app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/signup',
+    failureFlash: true
+  }));
+
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');

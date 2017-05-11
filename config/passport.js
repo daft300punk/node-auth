@@ -7,7 +7,7 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser(function(user, done) {
-    User.findById(id, function(err, user) {
+    User.findById(user.id, function(err, user) {
       done(err, user);
     });
   });
@@ -28,7 +28,7 @@ module.exports = function(passport) {
         } else {
           var newUser = new User();
           newUser.local.email = email;
-          newUser.local.password = newuser.generatehash(password);
+          newUser.local.password = newUser.generateHash(password);
 
           newUser.save(function(err) {
             if(err)
